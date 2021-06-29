@@ -1,0 +1,26 @@
+//i标签开头class为icon
+i[class^='icon'] {
+  display: inline-block;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.icon-fuzu {
+  background-image: url('~@/assets/icon/腐竹.svg');
+  width: 20px;
+  height: 15px;
+}
+.icon-nangua {
+  background-image: url('~@/assets/icon/南瓜.svg');
+  width: 20px;
+  height: 15px;
+}
+.icon-yangcong {
+  background-image: url('~@/assets/icon/洋葱.svg');
+  width: 20px;
+  height: 15px;
+}
+.icon-yingtao {
+  background-image: url('~@/assets/icon/樱桃.svg');
+  width: 20px;
+  height: 15px;
+}

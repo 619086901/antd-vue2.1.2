@@ -1,0 +1,50 @@
+.account {
+  width: 100vw;
+  height: 100vh; //游览器可视区的百分比
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(235, 235, 235, 0.5);
+  .form-wrap {
+    width: 230px;
+    background-color: white;
+    .ant-input {
+      font-size: 12px;
+    }
+    .ant-form-item {
+      margin-bottom: 10px;
+    }
+  }
+  .ant-form {
+    label {
+      display: block;
+      text-align: left;
+      padding-left: 10px;
+      font-size: 12px;
+      color: black;
+    }
+  }
+}
+
+#sc {
+  margin-left: 5px !important;
+  margin-top: 0px !important;
+  #SM_BTN_WRAPPER_1 {
+    #SM_BTN_1 {
+      width: 220px !important;
+      #rectMask {
+        width: 220px !important;
+        #rectBottom {
+          width: 300px;
+          height: 21px;
+          margin-top: 21px;
+          line-height: 42px;
+        }
+      }
+    }
+    #sm-btn-bg {
+      width: 220px !important;
+    }
+  }
+}
