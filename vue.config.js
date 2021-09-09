@@ -1,5 +1,5 @@
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '' : './',
+  publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
   //构建项目生成的目录 生产环境 和开发环境
   outputDir: process.env.NODE_ENV === 'production' ? 'dist' : 'devdist',
   //关闭语法编译警告
@@ -16,27 +16,76 @@ module.exports = {
         prependData: `@import "./src/styles/main.scss";`
       }
     }
+  },
+  devServer: {
+    host: '0.0.0.0', //服务器外部是否可访问
+    // proxy: {
+    //   '/user': {
+    //     target: 'http://121.89.244.34:9998', //跨域代理目标地址
+    //     ws: true, //websocket
+    //     changeOrigin: true //是否跨域
+    //     // pathRewrite: {
+    //     //   '^/user': '' //访问目标地址中没有则加上
+    //     // }
+    //   },
+    //   '/login': {
+    //     target: 'http://121.89.244.34:9998', //跨域代理目标地址
+    //     ws: true, //websocket
+    //     changeOrigin: true //是否跨域
+    //     // pathRewrite: {
+    //     //   '^/user': '' //访问目标地址中没有则加上
+    //     // }
+    //   }
+    // },
+    proxy: {
+      [process.env.VUE_APP_DATA_USER]: {
+        target: process.env.VUE_APP_DATA_URL,
+        ws: true,
+        changeOrigin: true //是否跨域
+        // pathRewrite: {
+        //   [`^${process.env.VUE_APP_DATA_USER}`]: '' //访问目标地址中没有则加上
+        // }
+      },
+      [process.env.VUE_APP_DATA_LOGIN]: {
+        target: process.env.VUE_APP_DATA_URL,
+        ws: true,
+        changeOrigin: true //是否跨域
+        // pathRewrite: {
+        //   [`^${process.env.VUE_APP_DATA_LOGIN}`]: '' //访问目标地址中没有则加上
+        // }
+      },
+      [process.env.VUE_APP_DATA_SCHOOL]: {
+        target: process.env.VUE_APP_DATA_URL,
+        ws: true,
+        changeOrigin: true //是否跨域
+        // pathRewrite: {
+        //   [`^${process.env.VUE_APP_DATA_LOGIN}`]: '' //访问目标地址中没有则加上
+        // }
+      },
+      [process.env.VUE_APP_DATA_ADDSCHOOL]: {
+        target: process.env.VUE_APP_DATA_URL,
+        ws: true,
+        changeOrigin: true //是否跨域
+        // pathRewrite: {
+        //   [`^${process.env.VUE_APP_DATA_LOGIN}`]: '' //访问目标地址中没有则加上
+        // }
+      },
+      [process.env.VUE_APP_DATA_DELECTSCHOOL]: {
+        target: process.env.VUE_APP_DATA_URL,
+        ws: true,
+        changeOrigin: true //是否跨域
+        // pathRewrite: {
+        //   [`^${process.env.VUE_APP_DATA_LOGIN}`]: '' //访问目标地址中没有则加上
+        // }
+      },
+      [process.env.VUE_APP_DATA_UPDATESCHOOL]: {
+        target: process.env.VUE_APP_DATA_URL,
+        ws: true,
+        changeOrigin: true //是否跨域
+        // pathRewrite: {
+        //   [`^${process.env.VUE_APP_DATA_LOGIN}`]: '' //访问目标地址中没有则加上
+        // }
+      }
+    }
   }
-  // devServer: {
-  //   host: '0.0.0.0', //服务器外部是否可访问
-  //   proxy: {
-  //     '/api': {
-  //       target: 'url', //跨域代理目标地址
-  //       ws: true, //websocket
-  //       changeOrigin: true, //是否跨域
-  //       pathRewrite: {
-  //         '^/api': '' //访问目标地址中没有则加上
-  //       }
-  //     }
-  //   },
-  //   proxy: {
-  //     [process.env.VUE_APP_DATA]: {
-  //       target: 'url',
-  //       ws: false,
-  //       pathRewrite: {
-  //         [`^${process.env.VUE_APP_DATA}`]: '' //访问目标地址中没有则加上
-  //       }
-  //     }
-  //   }
-  // }
 }
