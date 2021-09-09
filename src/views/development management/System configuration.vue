@@ -10,6 +10,7 @@
       取消全选
     </a-button>
     <span style="margin-left: 8px">
+      <!-- 全部删除 -->
       <template v-if="hasSelected">
         {{ `选中 ${selectedRowKeys.length} 项` }}
         <a-button
@@ -53,6 +54,7 @@
           "
           @pressEnter="handleSearch(selectedKeys, confirm, column.dataIndex)"
         />
+        <!-- 搜索 -->
         <a-button
           type="primary"
           size="small"
@@ -62,6 +64,7 @@
           <template #icon><SearchOutlined /></template>
           搜索
         </a-button>
+        <!-- 重置 -->
         <a-button
           size="small"
           style="width: 90px"
@@ -71,6 +74,7 @@
         </a-button>
       </div>
     </template>
+
     <!--筛选图标-->
     <template #filterIcon="filtered">
       <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
@@ -127,8 +131,14 @@ const data = []
 for (let i = 0; i < 100; i++) {
   data.push({
     key: i.toString(),
-    name: `名称 ${i}`,
-    age: `${i}`,
+    name: `2018319501${(function () {
+      if (i < 10) {
+        return `0` + i
+      } else {
+        return i
+      }
+    })()}`,
+    age: `姓名${i}`,
     address: `参数值 ${i}`,
     classification: `分类 ${i}`,
     remarks: `备注 ${i}`
@@ -144,7 +154,7 @@ export default {
 
     const columns = [
       {
-        title: '参数名称',
+        title: '学生学号',
         dataIndex: 'name',
         width: '15%',
         slots: {
@@ -164,7 +174,7 @@ export default {
         }
       },
       {
-        title: '唯一编码',
+        title: '姓名',
         dataIndex: 'age',
         width: '20%',
         slots: {
@@ -174,6 +184,7 @@ export default {
         },
         sorter: (a, b) => a.age - b.age,
         onFilter: (value, record) =>
+          // console.log(value, record)
           record.age.toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: (visible) => {
           if (visible) {
@@ -184,7 +195,7 @@ export default {
         }
       },
       {
-        title: '参数值',
+        title: '性别',
         dataIndex: 'address',
         width: '15%',
         slots: {
@@ -203,7 +214,7 @@ export default {
         }
       },
       {
-        title: '所属分类',
+        title: '班级',
         dataIndex: 'classification',
         width: '15%',
         slots: {
@@ -225,7 +236,7 @@ export default {
         }
       },
       {
-        title: '备注',
+        title: '个人电话',
         dataIndex: 'remarks',
         width: '15%',
         slots: {

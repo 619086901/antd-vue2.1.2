@@ -28,7 +28,7 @@ export default {
 @media screen and (max-width: 700px) {
   .ant-layout-content {
     margin: 24px 16px 0;
-    min-width: 0px !important;
+
     overflow: scroll;
     min-height: auto;
     height: auto;

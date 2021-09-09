@@ -96,7 +96,7 @@ const routes = [
         name: 'Systemconfiguration',
         hidden: true,
         meta: {
-          title: '系统配置',
+          title: '表单',
           belong: '开发管理',
           timu: '首页',
           class: 'icon-yingtao'
@@ -111,7 +111,7 @@ const routes = [
         name: 'Mailsending',
         hidden: true,
         meta: {
-          title: '邮件发送',
+          title: '学生信息管理',
           belong: '开发管理',
           timu: '首页',
           class: 'icon-yangcong'
@@ -220,12 +220,12 @@ const routes = [
     ]
   },
   //404
-  {
-    path: '/:all*',
-    name: 'Error',
-    hidden: false,
-    component: () => import('../views/Error.vue')
-  },
+  // {
+  //   path: '/:all*',
+  //   name: 'Error',
+  //   hidden: false,
+  //   component: () => import('../views/Error.vue')
+  // },
   //重定向是跳转
   //别名是加载，但是地址栏不变
   {
@@ -239,7 +239,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(), //createWebHashHistory对SEO不太好，搜索引擎优化不好
+  history: createWebHistory(), //createWebHashHistory对SEO不太好，搜索引擎优化不好
   base: process.env.BASE_URL, //会跟publicPath 一样
   routes,
   scrollBehavior(to, from, savedPosition) {

@@ -4,7 +4,7 @@
       <a-form
         name="custom-validation"
         ref="formRef"
-        @submit="onSubmit"
+        @finish="onSubmit"
         :model="account_form"
         :rules="rules_form"
         validateTrigger
@@ -15,7 +15,6 @@
           name="username"
         >
           <a-input
-            autocomplete="off"
             placeholder="手机号"
             v-model:value="account_form.username"
             :disabled="account_disabled"
@@ -28,7 +27,6 @@
         >
           <a-input-password
             type="password"
-            autocomplete="off"
             placeholder="密码"
             v-model:value="account_form.password"
           />
@@ -77,6 +75,9 @@ export default {
   //   title: String
   // },
   setup() {
+    const internalInstance = getCurrentInstance()
+    console.log(internalInstance.appContext.config.globalProperties)
+
     //用户名校验
     const account_formUsername = async (_rule, value, _callback) => {
       if (!value) {
@@ -84,7 +85,7 @@ export default {
       } else if (!phone(value)) {
         return Promise.reject('请输入11位正确手机号')
       } else {
-        checkUsername()
+        // checkUsername()
         return Promise.resolve()
       }
     }
@@ -133,22 +134,22 @@ export default {
     //检查用户名是否存在
     const checkUsername = () => {
       //文本框禁用
-      formconfig.account_disabled = true
-      getJSON(
-        'https://cdn.jsdelivr.net/gh/619086901/619086901.github.io/json/json.json'
-      )
-        .then((data) => {
-          formconfig.account_disabled = false
-          for (let [key, value] of data.entries()) {
-            if (formconfig.account_form.username === value.username) {
-              message.success('手机号可用')
-              break
-            } else if (data.length === key + 1) {
-              message.error('手机号不存在')
-            }
-          }
-        })
-        .catch(() => (formconfig.account_disabled = false))
+      // formconfig.account_disabled = true
+      // getJSON(
+      //   'https://cdn.jsdelivr.net/gh/619086901/619086901.github.io/json/json.json'
+      // )
+      //   .then((data) => {
+      //     formconfig.account_disabled = false
+      //     for (let [key, value] of data.entries()) {
+      //       if (formconfig.account_form.username === value.username) {
+      //         message.success('手机号可用')
+      //         break
+      //       } else if (data.length === key + 1) {
+      //         message.error('手机号不存在')
+      //       }
+      //     }
+      //   })
+      //   .catch(() => (formconfig.account_disabled = false))
     }
 
     // const { options } = useRouter()
@@ -159,30 +160,34 @@ export default {
     // console.log(route)
 
     const onSubmit = () => {
-      getJSON(
-        'https://cdn.jsdelivr.net/gh/619086901/619086901.github.io/json/json.json'
-      )
+      let payload = JSON.stringify({
+        user: formconfig.account_form.username,
+        password: formconfig.account_form.password
+      })
+      fetch(`${process.env.VUE_APP_DATA_URL}/login`, {
+        method: 'POST',
+        body: payload,
+        headers: {
+          'content-type': 'application/json'
+        }
+      })
+        .then((response) => {
+          return response.json()
+        })
         .then((data) => {
-          for (let [key, value] of data.entries()) {
-            //迭代
-            if (
-              formconfig.account_form.username === value.username &&
-              formconfig.account_form.password === value.password
-            ) {
-              //验证手机号和密码
-              message.success('登录成功')
-              sessionStorage.setItem('token', key)
-              localStorage.setItem('selectedKeys', '/index')
-              router.push('/shouye') //跳转
-              break
-            } else if (data.length === key + 1) {
-              //前面都错了，并且是最后一组密码，则输出登录失败
-              console.log(Verification)
-              message.error('登录失败')
-            }
+          console.log(data)
+          if (data.code === 200) {
+            message.success('登录成功')
+            sessionStorage.setItem('token', formconfig.account_form.username)
+            localStorage.setItem('selectedKeys', '/index')
+            router.push('/shouye') //跳转
+          } else {
+            message.error('登录失败,请检测用户名或密码')
           }
         })
-        .catch((error) => console.log(error))
+        .catch((e) => console.log(e))
+
+      return false
     }
     const { appContext } = getCurrentInstance()
     const globalProperties = appContext.config.globalProperties
@@ -194,7 +199,6 @@ export default {
     const data = toRefs(formconfig)
     console.log('当前环境变量', process.env.NODE_ENV)
     console.log('当前环境路径publicPath：' + process.env.BASE_URL)
-    console.log('--------', process.env.VUE_APP_DATA)
 
     return {
       formconfig,

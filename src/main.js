@@ -16,7 +16,8 @@ import {
   Popconfirm,
   Table,
   Col,
-  Row
+  Row,
+  InputNumber
 } from 'ant-design-vue'
 
 //import { createI18n } from 'vue-i18n'
@@ -42,5 +43,6 @@ app
   .use(Table)
   .use(Col)
   .use(Row)
+  .use(InputNumber)
 
 app.use(store).use(router).mount('#app')

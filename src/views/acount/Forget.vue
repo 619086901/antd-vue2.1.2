@@ -14,11 +14,7 @@
           label="手机号"
           name="username"
         >
-          <a-input
-            autocomplete="off"
-            placeholder="手机号"
-            v-model:value="account_form.username"
-          />
+          <a-input placeholder="手机号" v-model:value="account_form.username" />
         </a-form-item>
 
         <a-form-item
@@ -28,7 +24,6 @@
         >
           <a-input-password
             type="password"
-            autocomplete="off"
             placeholder="密码"
             v-model:value="account_form.password"
           />
@@ -41,7 +36,6 @@
         >
           <a-input-password
             type="password"
-            autocomplete="off"
             placeholder="确认密码"
             v-model:value="account_form.passwords"
           />
@@ -57,7 +51,6 @@
             <a-col :span="10">
               <a-input
                 type="password"
-                autocomplete="off"
                 v-model:value="account_form.code"
               ></a-input
             ></a-col>

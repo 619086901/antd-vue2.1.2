@@ -30,3 +30,13 @@ export function checkCode(value) {
   let regCode = /^[\w]{6}$/
   return regCode.test(value)
 }
+/**
+ * 性别
+ * @param {*} value
+ * @returns
+ */
+export function checkAge(value) {
+  if (value.length !== 1) return false
+  let regCode = new RegExp('[/^男$|^女&/]')
+  return regCode.test(value)
+}
