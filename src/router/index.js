@@ -239,7 +239,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHistory(), //createWebHashHistory对SEO不太好，搜索引擎优化不好
+  history: createWebHashHistory(), //createWebHashHistory对SEO不太好，搜索引擎优化不好
   base: process.env.BASE_URL, //会跟publicPath 一样
   routes,
   scrollBehavior(to, from, savedPosition) {
