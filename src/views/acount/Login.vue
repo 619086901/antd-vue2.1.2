@@ -161,7 +161,7 @@ export default {
 
     const onSubmit = () => {
       let payload = JSON.stringify({
-        user: formconfig.account_form.username,
+        username: formconfig.account_form.username,
         password: formconfig.account_form.password
       })
       fetch(`${process.env.VUE_APP_DATA_URL}/login`, {
