@@ -13,6 +13,7 @@
 <script>
 import { reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { message } from 'ant-design-vue'
 export default {
   setup() {
     const formconfig = reactive({
@@ -29,6 +30,7 @@ export default {
         formconfig.error = '我是error'
         formconfig.post = '我是post'
         formconfig.loading = false
+        message.success('成功')
       }, 2000)
     }
     fetchData()
